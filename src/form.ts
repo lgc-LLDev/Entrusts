@@ -91,8 +91,8 @@ export async function entrustDetail(
   const detail =
     `${
       isCompleted(mission)
-        ? `§a完成者: §b${data.xuid2name(mission.completor)}\n` +
-          `§a完成时间: §b${formatDate({
+        ? `§a完成者§r: §b${data.xuid2name(mission.completor)}\n` +
+          `§a完成时间§r: §b${formatDate({
             date: new Date(mission.completeTime),
           })}\n` +
           `§r================\n`

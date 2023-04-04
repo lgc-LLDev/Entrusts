@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "student_2333 <lgc2333@126.com>",
-  "license": "",
+  "license": "Apache-2.0",
   "dependencies": {
     "form-api-ex": "^0.2.2",
     "schemastery": "^3.7.2"

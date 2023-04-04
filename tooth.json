@@ -1,0 +1,23 @@
+{
+  "commands": [],
+  "confirmation": [],
+  "dependencies": {},
+  "format_version": 1,
+  "information": {
+    "author": "lgc2333",
+    "description": "玩家可发布的委托",
+    "homepage": "https://github.com/lgc-LLSEDev/Entrusts",
+    "license": "Apache-2.0",
+    "name": "Entrusts"
+  },
+  "placement": [
+    {
+      "source": "dist/*",
+      "destination": "plugins/nodejs/entrusts/*"
+    }
+  ],
+  "possession": ["plugins/Entrusts/"],
+  "tool": {},
+  "tooth": "github.com/lgc-LLSEDev/Entrusts",
+  "version": "0.1.0"
+}
