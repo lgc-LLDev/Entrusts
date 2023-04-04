@@ -1,0 +1,17 @@
+{
+  "name": "entrusts",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "student_2333 <lgc2333@126.com>",
+  "license": "",
+  "dependencies": {
+    "form-api-ex": "^0.2.2",
+    "schemastery": "^3.7.2"
+  }
+}
