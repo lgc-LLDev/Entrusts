@@ -1,7 +1,7 @@
 {
   "name": "entrusts",
   "version": "0.1.0",
-  "description": "",
+  "description": "玩家可发布的委托系统",
   "main": "index.js",
   "scripts": {
     "build": "tsc",

@@ -1,6 +1,4 @@
 "use strict";
-// LiteLoaderScript Dev Helper
-/// <reference path="../../HelperLib/src/index.d.ts"/>
 Object.defineProperty(exports, "__esModule", { value: true });
 const const_1 = require("./const");
 require("./listener");

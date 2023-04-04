@@ -18,33 +18,33 @@ export interface EntrustItem {
 export type ConfigEntrustItem = Omit<EntrustItem, 'amount'>;
 
 export interface Config {
-  /** 任务可以提交的奖励物品标准类型名及显示名称列表 */
+  /** 委托可以提交的奖励物品标列表 */
   entrustItems: ConfigEntrustItem[];
-  /** 任务可以提交的需求物品标准类型名及显示名称列表 */
+  /** 委托可以提交的需求物品列表 */
   rewardItems: ConfigEntrustItem[];
-  /** 所有奖励物品的任务表单是否放在一起 */
+  /** 所有奖励物品的委托表单是否放在一起 */
   allInOne: boolean;
 }
 
 export type Entrust<T extends boolean = boolean> = {
-  /** 任务名称 */
+  /** 委托名称 */
   name: string;
-  /** 任务提交者 xuid */
+  /** 委托提交者 xuid */
   submitor: string;
-  /** 任务提交时间 `Date.toJson()` */
+  /** 委托提交时间 `Date.toJson()` */
   submitTime: string;
-  /** 任务提交的奖励物品 */
+  /** 委托提交的奖励物品 */
   submitItem: EntrustItem;
-  /** 任务需要的物品 */
+  /** 委托需要的物品 */
   requirement: EntrustItem;
-  /** 任务是否已完成 */
+  /** 委托是否已完成 */
   completed?: T;
 } & (T extends true
   ? {
       completed: true;
-      /** 任务完成者 */
+      /** 委托完成者 */
       completor: string;
-      /** 任务完成时间 `Date.toJson()` */
+      /** 委托完成时间 `Date.toJson()` */
       completeTime: string;
     }
   : {});

@@ -1,29 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeContainerItem = exports.countContainerItem = exports.formatDate = exports.wrapAsyncFunc = exports.logError = exports.formatError = exports.sleep = void 0;
-/**
- * 延时
- * @param time 时长，单位 ms
- */
 function sleep(time) {
     return new Promise((resolve) => {
         setTimeout(resolve, time);
     });
 }
 exports.sleep = sleep;
-/**
- * 格式化错误堆栈
- * @param e 错误对象
- * @returns 格式化后的错误
- */
 function formatError(e) {
     return e instanceof Error ? `${e.stack}\n${e.message}` : String(e);
 }
 exports.formatError = formatError;
-/**
- * 输出错误到控制台
- * @param e 错误
- */
 function logError(e) {
     logger.error(formatError(e));
 }
@@ -53,7 +40,6 @@ function formatDate(options = {}) {
 exports.formatDate = formatDate;
 function countContainerItem(container, itemType) {
     let count = 0;
-    // log(container.getAllItems().map((v) => `${v.type}:${v.count}`));
     for (const it of container.getAllItems())
         if (it.type === itemType)
             count += it.count;

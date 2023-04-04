@@ -264,7 +264,7 @@ export async function entrustList(
   }
 
   const form = new SimpleFormEx(willDisplay);
-  form.title = '悬赏列表';
+  form.title = '委托列表';
   form.canJumpPage = true;
   form.canTurnPage = true;
   form.hasSearchButton = true;

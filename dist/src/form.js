@@ -39,9 +39,7 @@ async function submitEntrust(player, mission) {
     (0, config_1.writeEntrusts)();
     (0, util_1.removeContainerItem)(inv, requirement.type, requirement.amount);
     player.giveItem(mc.newItem(submitItem.type, 1), submitItem.amount);
-    // player.refreshItems();
     player.tell('§a成功提交委托~');
-    // 玩家在线，进行通知
     const notifyPl = mc.getPlayer(submitor);
     if (notifyPl)
         notifyPl.tell(`§a你发布的委托被 §g${realName} §a完成啦，快来看看吧~`);
