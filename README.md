@@ -31,6 +31,18 @@
 - 目前不支持带 特殊值 / NBT 物品的委托
 - 目前不支持设置多个委托物品与奖励
 
+## 安装
+
+### 使用 Lip
+
+```shell
+lip i entrusts
+```
+
+### 手动打包
+
+将 `dist` 文件夹中所有内容打包成 `zip`，之后改后缀为 `llplugin` 安装即可
+
 ## 配置文件
 
 配置文件路径：`plugins/Entrusts/config.json`  
