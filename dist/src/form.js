@@ -175,7 +175,7 @@ async function entrustList(player, item) {
         return false;
     }
     const form = new form_api_ex_1.SimpleFormEx(willDisplay);
-    form.title = '悬赏列表';
+    form.title = '委托列表';
     form.canJumpPage = true;
     form.canTurnPage = true;
     form.hasSearchButton = true;
