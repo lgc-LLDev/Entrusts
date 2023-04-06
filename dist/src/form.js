@@ -110,8 +110,13 @@ async function entrustDetail(player, mission) {
         form.buttons.push([`§3接取委托`, submitEntrust]);
     if (player.xuid === submitor && completed)
         form.buttons.push([`§3收取奖励`, getAward]);
-    if ((player.xuid === submitor || player.isOP()) && !completed)
-        form.buttons.push([`§3撤销委托`, revokeEntrust]);
+    if ((player.xuid === submitor || player.isOP()) && !completed) {
+        const revokeWrapped = async () => {
+            const ret = await revokeEntrust(player, mission);
+            return ret ? true : entrustDetail(player, mission);
+        };
+        form.buttons.push([`§3撤销委托`, revokeWrapped]);
+    }
     form.buttons.push(['§3返回列表', async () => false]);
     const res = await form.sendAsync(player);
     if (!res)
@@ -270,7 +275,7 @@ async function entrustList(player, item, isMine = false) {
 }
 exports.entrustList = entrustList;
 function myEntrusts(player, item) {
-    return entrustList(player, item);
+    return entrustList(player, item, true);
 }
 exports.myEntrusts = myEntrusts;
 async function entrustMenu(player, item) {
