@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeContainerItem = exports.countContainerItem = exports.formatDate = exports.wrapAsyncFunc = exports.logError = exports.formatError = exports.sleep = void 0;
+exports.clearObject = exports.removeContainerItem = exports.countContainerItem = exports.formatDate = exports.wrapAsyncFunc = exports.logError = exports.formatError = exports.sleep = void 0;
 function sleep(time) {
     return new Promise((resolve) => {
         setTimeout(resolve, time);
@@ -62,3 +62,9 @@ function removeContainerItem(container, type, amount) {
     }
 }
 exports.removeContainerItem = removeContainerItem;
+function clearObject(obj) {
+    for (const k in obj)
+        delete obj[k];
+    return obj;
+}
+exports.clearObject = clearObject;

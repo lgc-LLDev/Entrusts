@@ -89,3 +89,9 @@ export function removeContainerItem(
     if (removedCount >= amount) return;
   }
 }
+
+export function clearObject(obj: any): {} {
+  // eslint-disable-next-line guard-for-in
+  for (const k in obj) delete obj[k];
+  return obj;
+}

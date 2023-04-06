@@ -3,10 +3,18 @@ import { entrustMenu } from './form';
 import { wrapAsyncFunc } from './util';
 
 mc.listen('onUseItem', (player, item) => {
-  const openableItems = Object.values(config.entrustItems).map((v) => v.type);
-  if (openableItems.includes(item.type)) {
-    wrapAsyncFunc(entrustMenu)(player, config.allInOne ? undefined : item.type);
-    return false;
+  for (const eit of config.entrustItems) {
+    if (
+      (config.onlyUseOpenItem ? false : eit.type === item.type) ||
+      eit.openItem.includes(item.type)
+    ) {
+      wrapAsyncFunc(entrustMenu)(
+        player,
+        config.allInOne ? undefined : item.type
+      );
+      return false;
+    }
   }
+
   return true;
 });

@@ -7,7 +7,9 @@ import {
   PLUGIN_NAME,
   PLUGIN_VERSION,
 } from './const';
+
 import './listener';
+import './command';
 
 logger.setTitle(PLUGIN_NAME);
 

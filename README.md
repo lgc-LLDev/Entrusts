@@ -43,6 +43,18 @@ lip i entrusts
 
 将 `dist` 文件夹中所有内容打包成 `zip`，之后改后缀为 `llplugin` 安装即可
 
+## 指令
+
+### `entrusts reload`
+
+- 权限：OP / 控制台
+- 介绍：重载配置文件
+
+### `entrusts`
+
+- 权限：所有人
+- 介绍：打开委托界面
+
 ## 配置文件
 
 配置文件路径：`plugins/Entrusts/config.json`  
@@ -58,7 +70,13 @@ lip i entrusts
       "type": "minecraft:emerald",
 
       // 物品显示名
-      "name": "绿宝石"
+      "name": "绿宝石",
+
+      // 物品显示的图标，可以不填
+      "icon": "textures/items/emerald",
+
+      // 能打开该种物品委托界面的其他物品
+      "openItem": ["minecraft:feather"]
     }
 
     // ...
@@ -66,9 +84,10 @@ lip i entrusts
 
   // 委托可以提交的需求物品列表
   "rewardItems": [
-    // 格式同上
+    // 格式同上，不过没有 openItem
     {
       "type": "minecraft:diamond",
+      "icon": "textures/items/diamond",
       "name": "钻石"
     }
 
@@ -77,7 +96,10 @@ lip i entrusts
 
   // 委托界面中，是否将所有奖励物品的委托放在一起
   // 当为 false 时，列表中将只显示对应奖励物品的委托
-  "allInOne": false
+  "allInOne": false,
+
+  // 是否只能使用上面配置的 openItem 来打开委托菜单
+  "onlyUseOpenItem": false
 }
 ```
 
@@ -109,4 +131,10 @@ QQ：3076823485
 
 ## 更新日志
 
-暂无
+### 0.2.0
+
+- 优化发布委托的表单
+- 委托发布者 / OP 可以撤销已发布的未完成的委托
+- 加入一些配置项
+- 加入一些指令
+- 其他小修改
