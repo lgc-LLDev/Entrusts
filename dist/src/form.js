@@ -136,13 +136,15 @@ async function selectItem(player, items) {
     return form.sendAsync(player);
 }
 exports.selectItem = selectItem;
-async function uploadEntrust(player, item) {
+async function uploadEntrust(player, items) {
     const entrustInfo = {
         name: `玩家 ${player.realName} 发布的委托`,
         submitor: player.xuid,
         submitTime: '',
         submitItem: {
-            ...config_1.config.entrustItems[item ? config_1.config.entrustItems.findIndex((v) => v.type === item) : 0],
+            ...config_1.config.entrustItems[items && items.length
+                ? config_1.config.entrustItems.findIndex((v) => v.type === items[0])
+                : 0],
             amount: 1,
         },
         requirement: {
@@ -163,8 +165,8 @@ async function uploadEntrust(player, item) {
         }
         return undefined;
     };
-    const editItem = async (willEdit, items) => {
-        const res = await selectItem(player, items);
+    const editItem = async (willEdit, newItems) => {
+        const res = await selectItem(player, newItems);
         if (res)
             Object.assign(willEdit, res);
     };
@@ -248,10 +250,10 @@ async function getAllAwards(player) {
     return true;
 }
 exports.getAllAwards = getAllAwards;
-async function entrustList(player, item, isMine = false) {
+async function entrustList(player, items, isMine = false) {
     const willDisplay = config_1.entrusts.filter(isMine
         ? (v) => v.submitor === player.xuid
-        : (v) => !v.completed && (!item || v.submitItem.type === item));
+        : (v) => !v.completed && (!items || items.includes(v.submitItem.type)));
     if (!willDisplay.length) {
         await (0, form_api_ex_1.sendModalFormAsync)(player, '提示', isMine
             ? '§b你还没有发布过委托哦，快去发布一个吧！'
@@ -270,15 +272,15 @@ async function entrustList(player, item, isMine = false) {
         return false;
     const ret = await entrustDetail(player, res);
     if (!ret)
-        return entrustList(player, item);
+        return entrustList(player, items);
     return true;
 }
 exports.entrustList = entrustList;
-function myEntrusts(player, item) {
-    return entrustList(player, item, true);
+function myEntrusts(player, items) {
+    return entrustList(player, items, true);
 }
 exports.myEntrusts = myEntrusts;
-async function entrustMenu(player, item) {
+async function entrustMenu(player, items) {
     const form = new form_api_ex_1.SimpleFormEx([
         [`§3委托列表`, entrustList],
         [`§3发布委托`, uploadEntrust],
@@ -291,9 +293,9 @@ async function entrustMenu(player, item) {
     const res = await form.sendAsync(player);
     if (!res)
         return false;
-    const ret = await res[1](player, item);
+    const ret = await res[1](player, items);
     if (!ret)
-        return entrustMenu(player, item);
+        return entrustMenu(player, items);
     return true;
 }
 exports.entrustMenu = entrustMenu;

@@ -10,6 +10,10 @@ cmd.mandatory('reload', ParamType.Enum, 'reload', 1);
 cmd.overload(['reload']);
 cmd.overload([]);
 cmd.setCallback((_, { player }, out, { reload }) => {
+    if (config_1.config.cmdOnlyOp && player && !player.isOP()) {
+        out.error('仅 OP 可执行此命令');
+        return false;
+    }
     if (reload) {
         if (player && !player.isOP()) {
             out.error('仅 OP 可执行此命令');

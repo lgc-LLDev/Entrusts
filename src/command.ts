@@ -1,4 +1,4 @@
-import { reloadConfig } from './config';
+import { config, reloadConfig } from './config';
 import { PLUGIN_NAME } from './const';
 import { entrustMenu } from './form';
 import { formatError, wrapAsyncFunc } from './util';
@@ -18,6 +18,12 @@ cmd.overload(['reload']);
 cmd.overload([]);
 
 cmd.setCallback((_, { player }, out, { reload }: CommandResult) => {
+  // OnlyOP
+  if (config.cmdOnlyOp && player && !player.isOP()) {
+    out.error('仅 OP 可执行此命令');
+    return false;
+  }
+
   // entrusts reload
   if (reload) {
     if (player && !player.isOP()) {

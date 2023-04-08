@@ -21,20 +21,19 @@ export interface EntrustItem extends ItemConfig {
   amount: number;
 }
 
-export interface ConfigEntrustItem extends ItemConfig {
-  /** 用于打开该物品委托页面的物品标准类型名列表 */
-  openItem: string[];
-}
-
 export interface Config {
   /** 委托可以提交的 需求物品 列表 */
-  entrustItems: ConfigEntrustItem[];
+  entrustItems: ItemConfig[];
   /** 委托可以提交的 奖励物品 列表 */
   rewardItems: ItemConfig[];
+  /** 可用于打开对应物品委托界面的其他物品 (`{ [打开物品: string]: 对应物品[] }`) */
+  openItems: Record<string, string[]>;
   /** 所有奖励物品的委托表单是否放在一起 */
   allInOne: boolean;
   /** 是否只使用 openItem 打开委托页面 */
   onlyUseOpenItem: boolean;
+  /** 是否只有 OP 才能使用插件指令 */
+  cmdOnlyOp: boolean;
 }
 
 export type Entrust<T extends boolean = boolean> = {
@@ -67,14 +66,6 @@ export const itemConfigSchema: Schema<ItemConfig> = Schema.object({
   name: Schema.string().required(),
   icon: Schema.string(),
 });
-export const configEntrustItemSchema: Schema<ConfigEntrustItem> = Schema.object(
-  {
-    type: Schema.string().required(),
-    name: Schema.string().required(),
-    icon: Schema.string(),
-    openItem: Schema.array(Schema.string()).default([]),
-  }
-);
 export const entrustItemSchema: Schema<EntrustItem> = Schema.object({
   type: Schema.string().required(),
   name: Schema.string().required(),
@@ -83,19 +74,24 @@ export const entrustItemSchema: Schema<EntrustItem> = Schema.object({
 });
 
 export const configSchema: Schema<Config> = Schema.object({
-  entrustItems: Schema.array(configEntrustItemSchema).default([
+  entrustItems: Schema.array(itemConfigSchema).default([
     {
       type: 'minecraft:emerald',
       name: '绿宝石',
       icon: 'textures/items/emerald',
-      openItem: [],
     },
   ]),
   rewardItems: Schema.array(itemConfigSchema).default([
-    { type: 'minecraft:diamond', icon: 'textures/items/diamond', name: '钻石' },
+    {
+      type: 'minecraft:diamond',
+      name: '钻石',
+      icon: 'textures/items/diamond',
+    },
   ]),
+  openItems: Schema.dict(Schema.array(Schema.string())).default({}),
   allInOne: Schema.boolean().default(false),
   onlyUseOpenItem: Schema.boolean().default(false),
+  cmdOnlyOp: Schema.boolean().default(false),
 });
 
 export const entrustSchema: Schema<Entrust> = Schema.object({

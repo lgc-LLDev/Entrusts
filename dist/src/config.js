@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writeEntrusts = exports.writeConfig = exports.reloadConfig = exports.entrusts = exports.config = exports.readConfig = exports.writeFile = exports.entrustListSchema = exports.entrustSchema = exports.configSchema = exports.entrustItemSchema = exports.configEntrustItemSchema = exports.itemConfigSchema = exports.entrustsFilePath = exports.configFilePath = void 0;
+exports.writeEntrusts = exports.writeConfig = exports.reloadConfig = exports.entrusts = exports.config = exports.readConfig = exports.writeFile = exports.entrustListSchema = exports.entrustSchema = exports.configSchema = exports.entrustItemSchema = exports.itemConfigSchema = exports.entrustsFilePath = exports.configFilePath = void 0;
 const fs_1 = require("fs");
 const path_1 = require("path");
 const schemastery_1 = __importDefault(require("schemastery"));
@@ -16,12 +16,6 @@ exports.itemConfigSchema = schemastery_1.default.object({
     name: schemastery_1.default.string().required(),
     icon: schemastery_1.default.string(),
 });
-exports.configEntrustItemSchema = schemastery_1.default.object({
-    type: schemastery_1.default.string().required(),
-    name: schemastery_1.default.string().required(),
-    icon: schemastery_1.default.string(),
-    openItem: schemastery_1.default.array(schemastery_1.default.string()).default([]),
-});
 exports.entrustItemSchema = schemastery_1.default.object({
     type: schemastery_1.default.string().required(),
     name: schemastery_1.default.string().required(),
@@ -29,19 +23,24 @@ exports.entrustItemSchema = schemastery_1.default.object({
     amount: schemastery_1.default.number().required(),
 });
 exports.configSchema = schemastery_1.default.object({
-    entrustItems: schemastery_1.default.array(exports.configEntrustItemSchema).default([
+    entrustItems: schemastery_1.default.array(exports.itemConfigSchema).default([
         {
             type: 'minecraft:emerald',
             name: '绿宝石',
             icon: 'textures/items/emerald',
-            openItem: [],
         },
     ]),
     rewardItems: schemastery_1.default.array(exports.itemConfigSchema).default([
-        { type: 'minecraft:diamond', icon: 'textures/items/diamond', name: '钻石' },
+        {
+            type: 'minecraft:diamond',
+            name: '钻石',
+            icon: 'textures/items/diamond',
+        },
     ]),
+    openItems: schemastery_1.default.dict(schemastery_1.default.array(schemastery_1.default.string())).default({}),
     allInOne: schemastery_1.default.boolean().default(false),
     onlyUseOpenItem: schemastery_1.default.boolean().default(false),
+    cmdOnlyOp: schemastery_1.default.boolean().default(false),
 });
 exports.entrustSchema = schemastery_1.default.object({
     name: schemastery_1.default.string().required(),

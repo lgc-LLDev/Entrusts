@@ -73,12 +73,8 @@ lip i entrusts
       "name": "绿宝石",
 
       // 物品显示的图标，可以不填
-      "icon": "textures/items/emerald",
-
-      // 能打开该种物品委托界面的其他物品
-      "openItem": ["minecraft:feather"]
+      "icon": "textures/items/emerald"
     }
-
     // ...
   ],
 
@@ -90,16 +86,26 @@ lip i entrusts
       "icon": "textures/items/diamond",
       "name": "钻石"
     }
-
     // ...
   ],
+
+  // 可用于打开委托列表的物品
+  // 键为打开界面所用的物品，值为对应的 entrustItem
+  "openItems": {
+    "minecraft:stick": ["minecraft:emerald"],
+    "minecraft:feather": ["minecraft:emerald"]
+    // ...
+  },
 
   // 委托界面中，是否将所有奖励物品的委托放在一起
   // 当为 false 时，列表中将只显示对应奖励物品的委托
   "allInOne": false,
 
-  // 是否只能使用上面配置的 openItem 来打开委托菜单
-  "onlyUseOpenItem": false
+  // 是否只能使用上面配置的 openItems 来打开委托菜单
+  "onlyUseOpenItem": false,
+
+  // 是否只有 OP 能执行插件指令
+  "onlyOpCmd": false
 }
 ```
 
@@ -130,6 +136,11 @@ QQ：3076823485
   </details>
 
 ## 更新日志
+
+### 0.2.1
+
+- 将原来 `entrustItems` 内的 `openItem` 配置单独迁移出来到 `openItems`
+- 新增 `onlyOpCmd` 配置
 
 ### 0.2.0
 

@@ -183,7 +183,7 @@ export async function selectItem(
 
 export async function uploadEntrust(
   player: Player,
-  item?: string
+  items?: string[]
 ): Promise<boolean> {
   const entrustInfo: Entrust = {
     name: `玩家 ${player.realName} 发布的委托`,
@@ -191,7 +191,9 @@ export async function uploadEntrust(
     submitTime: '',
     submitItem: {
       ...config.entrustItems[
-        item ? config.entrustItems.findIndex((v) => v.type === item) : 0
+        items && items.length
+          ? config.entrustItems.findIndex((v) => v.type === items[0])
+          : 0
       ],
       amount: 1,
     },
@@ -231,9 +233,9 @@ export async function uploadEntrust(
 
   const editItem = async (
     willEdit: ItemConfig,
-    items: ItemConfig[]
+    newItems: ItemConfig[]
   ): Promise<void> => {
-    const res = await selectItem(player, items);
+    const res = await selectItem(player, newItems);
     if (res) Object.assign(willEdit, res);
   };
 
@@ -362,13 +364,13 @@ export async function getAllAwards(player: Player): Promise<boolean> {
 
 export async function entrustList(
   player: Player,
-  item?: string,
+  items?: string[],
   isMine = false
 ): Promise<boolean> {
   const willDisplay = entrusts.filter(
     isMine
       ? (v) => v.submitor === player.xuid
-      : (v) => !v.completed && (!item || v.submitItem.type === item)
+      : (v) => !v.completed && (!items || items.includes(v.submitItem.type))
   );
 
   if (!willDisplay.length) {
@@ -396,21 +398,21 @@ export async function entrustList(
   if (!res) return false;
 
   const ret = await entrustDetail(player, res);
-  if (!ret) return entrustList(player, item);
+  if (!ret) return entrustList(player, items);
 
   return true;
 }
 
-export function myEntrusts(player: Player, item?: string): Promise<boolean> {
-  return entrustList(player, item, true);
+export function myEntrusts(player: Player, items?: string[]): Promise<boolean> {
+  return entrustList(player, items, true);
 }
 
 export async function entrustMenu(
   player: Player,
-  item?: string
+  items?: string[]
 ): Promise<boolean> {
   const form = new SimpleFormEx<
-    [string, (p: Player, it?: string) => Promise<boolean>]
+    [string, (p: Player, it?: string[]) => Promise<boolean>]
   >([
     [`§3委托列表`, entrustList],
     [`§3发布委托`, uploadEntrust],
@@ -424,8 +426,8 @@ export async function entrustMenu(
   const res = await form.sendAsync(player);
   if (!res) return false;
 
-  const ret = await res[1](player, item);
-  if (!ret) return entrustMenu(player, item);
+  const ret = await res[1](player, items);
+  if (!ret) return entrustMenu(player, items);
 
   return true;
 }
