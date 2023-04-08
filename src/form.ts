@@ -239,6 +239,23 @@ export async function uploadEntrust(
     if (res) Object.assign(willEdit, res);
   };
 
+  const checkAmount = async (
+    item: string,
+    amount: number
+  ): Promise<boolean> => {
+    if (countContainerItem(player.getInventory(), item) < amount) {
+      await sendModalFormAsync(
+        player,
+        '提示',
+        '你背包需要提交的物品数量还不够呢……返回修改下数量吧',
+        '§a知道了',
+        '§a知道了'
+      );
+      return false;
+    }
+    return true;
+  };
+
   const editAmount = async (): Promise<void> => {
     const { submitItem, requirement } = entrustInfo;
     const form = new CustomFormEx('修改数量')
@@ -266,18 +283,7 @@ export async function uploadEntrust(
         return editAmount();
       }
 
-      if (
-        countContainerItem(player.getInventory(), submitItem.type) < submitNum
-      ) {
-        await sendModalFormAsync(
-          player,
-          '提示',
-          '你背包需要提交的物品数量还不够呢……返回修改下数量吧',
-          '§a知道了',
-          '§a知道了'
-        );
-        return editAmount();
-      }
+      if (!(await checkAmount(submitItem.type, submitNum))) return editAmount();
 
       submitItem.amount = submitNum;
       requirement.amount = requireNum;
@@ -332,7 +338,10 @@ export async function uploadEntrust(
     const val = await res[1]();
     if (val === false) return false;
 
-    if (val === true) {
+    if (
+      val === true &&
+      (await checkAmount(submitItem.type, submitItem.amount))
+    ) {
       const ok = await sendModalFormAsync(
         player,
         '提示',

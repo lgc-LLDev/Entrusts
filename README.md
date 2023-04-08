@@ -139,6 +139,7 @@ QQ：3076823485
 
 ### 0.2.1
 
+- 修复发布委托时没检查物品数量的 Bug
 - 将原来 `entrustItems` 内的 `openItem` 配置单独迁移出来到 `openItems`
 - 新增 `onlyOpCmd` 配置
 
