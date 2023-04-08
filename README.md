@@ -90,9 +90,11 @@ lip i entrusts
   ],
 
   // 可用于打开委托列表的物品
-  // 键为打开界面所用的物品，值为对应的 entrustItem
+  // 键为打开界面所用的物品，值为对应的 entrustItem 列表
   "openItems": {
+    // 使用木棍打开奖励绿宝石的委托列表
     "minecraft:stick": ["minecraft:emerald"],
+    // 同上，使用羽毛打开奖励绿宝石的委托列表
     "minecraft:feather": ["minecraft:emerald"]
     // ...
   },
