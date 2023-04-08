@@ -105,7 +105,7 @@ lip i entrusts
   "onlyUseOpenItem": false,
 
   // 是否只有 OP 能执行插件指令
-  "onlyOpCmd": false
+  "cmdOnlyOp": false
 }
 ```
 
@@ -141,7 +141,7 @@ QQ：3076823485
 
 - 修复发布委托时没检查物品数量的 Bug
 - 将原来 `entrustItems` 内的 `openItem` 配置单独迁移出来到 `openItems`
-- 新增 `onlyOpCmd` 配置
+- 新增 `cmdOnlyOp` 配置
 
 ### 0.2.0
 
