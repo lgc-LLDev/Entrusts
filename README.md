@@ -7,24 +7,24 @@
 ## 介绍 & 截图
 
 右键（移动端长按）配置文件中配置的物品打开委托菜单  
-![Alt text](https://raw.githubusercontent.com/lgc-LLSEDev/readme/main/Entrusts/1.png)
+![Alt text](https://raw.githubusercontent.com/lgc-LLDev/readme/main/Entrusts/1.png)
 
 委托列表，这里可以查看所有用该物品作奖励的委托  
 （如果配置文件 `allInOne` 为 `true`，这里则会显示所有委托）  
-![Alt text](https://raw.githubusercontent.com/lgc-LLSEDev/readme/main/Entrusts/2.png)
+![Alt text](https://raw.githubusercontent.com/lgc-LLDev/readme/main/Entrusts/2.png)
 
 他人发布的委托详情，可以进行接取（背包内对应物品要够）  
-![Alt text](https://raw.githubusercontent.com/lgc-LLSEDev/readme/main/Entrusts/3.png)
+![Alt text](https://raw.githubusercontent.com/lgc-LLDev/readme/main/Entrusts/3.png)
 
 发布委托界面，对应物品需要在配置项内自行配置  
-![Alt text](https://raw.githubusercontent.com/lgc-LLSEDev/readme/main/Entrusts/4.png)  
-![Alt text](https://raw.githubusercontent.com/lgc-LLSEDev/readme/main/Entrusts/5.png)
+![Alt text](https://raw.githubusercontent.com/lgc-LLDev/readme/main/Entrusts/4.png)  
+![Alt text](https://raw.githubusercontent.com/lgc-LLDev/readme/main/Entrusts/5.png)
 
 可以查看自己发布的委托以及完成情况（已完成的委托不会显示在委托列表）  
-![Alt text](https://raw.githubusercontent.com/lgc-LLSEDev/readme/main/Entrusts/6.png)
+![Alt text](https://raw.githubusercontent.com/lgc-LLDev/readme/main/Entrusts/6.png)
 
 已完成的委托详情  
-![Alt text](https://raw.githubusercontent.com/lgc-LLSEDev/readme/main/Entrusts/7.png)
+![Alt text](https://raw.githubusercontent.com/lgc-LLDev/readme/main/Entrusts/7.png)
 
 ## 缺陷
 
