@@ -1,0 +1,10 @@
+{
+  "entry": "Entrusts.js",
+  "name": "Entrusts",
+  "type": "lse-quickjs",
+  "dependencies": [
+    {
+      "name": "legacy-script-engine-quickjs"
+    }
+  ]
+}

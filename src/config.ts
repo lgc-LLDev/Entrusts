@@ -1,11 +1,10 @@
-import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
 import Schema from 'schemastery';
-import { dataPath } from './const';
+
+import { DATA_PATH } from './const';
 import { clearObject } from './util';
 
-export const configFilePath = join(dataPath, 'config.json');
-export const entrustsFilePath = join(dataPath, 'entrusts.json');
+export const CONFIG_FILE_PATH = `${DATA_PATH}/config.json`;
+export const ENTRUSTS_FILE_PATH = `${DATA_PATH}/entrusts.json`;
 
 export interface ItemConfig {
   /** 物品标准类型名 */
@@ -110,36 +109,34 @@ export const entrustListSchema: Schema<EntrustList> = Schema.array(
 ).default([]);
 
 export function writeFile<T>(path: string, obj: T) {
-  writeFileSync(path, JSON.stringify(obj, null, 2), { encoding: 'utf-8' });
+  file.writeTo(path, JSON.stringify(obj, null, 2));
 }
 
 export function readConfig<T>(path: string, validator: (v: any) => T): T {
-  const content = existsSync(path)
-    ? JSON.parse(readFileSync(path, { encoding: 'utf-8' }))
-    : null;
+  const content = file.exists(path) ? JSON.parse(file.readFrom(path)!) : null;
   const validated = validator(content);
   writeFile(path, validated);
   return validated;
 }
 
-export const config: Config = readConfig(configFilePath, configSchema);
+export const config: Config = readConfig(CONFIG_FILE_PATH, configSchema);
 export const entrusts: EntrustList = readConfig(
-  entrustsFilePath,
+  ENTRUSTS_FILE_PATH,
   entrustListSchema
 );
 
 export function reloadConfig() {
   clearObject(config);
-  Object.assign(config, readConfig(configFilePath, configSchema));
+  Object.assign(config, readConfig(CONFIG_FILE_PATH, configSchema));
 
   clearObject(entrusts);
-  Object.assign(entrusts, readConfig(entrustsFilePath, entrustListSchema));
+  Object.assign(entrusts, readConfig(ENTRUSTS_FILE_PATH, entrustListSchema));
 }
 
 export function writeConfig() {
-  writeFile(configFilePath, config);
+  writeFile(CONFIG_FILE_PATH, config);
 }
 
 export function writeEntrusts() {
-  writeFile(entrustsFilePath, entrusts);
+  writeFile(ENTRUSTS_FILE_PATH, entrusts);
 }

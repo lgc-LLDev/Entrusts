@@ -1,3 +1,5 @@
+import { formatError } from 'form-api-ex';
+
 /**
  * 延时
  * @param time 时长，单位 ms
@@ -9,28 +11,11 @@ export function sleep(time: number): Promise<void> {
 }
 
 /**
- * 格式化错误堆栈
- * @param e 错误对象
- * @returns 格式化后的错误
- */
-export function formatError(e: unknown): string {
-  return e instanceof Error ? `${e.stack}\n${e.message}` : String(e);
-}
-
-/**
  * 输出错误到控制台
  * @param e 错误
  */
 export function logError(e: unknown) {
   logger.error(formatError(e));
-}
-
-export function wrapAsyncFunc<T extends Array<unknown>>(
-  func: (...args: T) => Promise<unknown>
-): (...args: T) => void {
-  return (...args: T) => {
-    setTimeout(() => func(...args).catch(logError), 0);
-  };
 }
 
 export function formatDate(

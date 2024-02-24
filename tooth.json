@@ -1,23 +1,24 @@
 {
-  "commands": [],
-  "confirmation": [],
-  "dependencies": {},
-  "format_version": 1,
-  "information": {
-    "author": "lgc2333",
-    "description": "玩家可发布的委托系统",
-    "homepage": "https://github.com/lgc-LLSEDev/Entrusts",
-    "license": "Apache-2.0",
-    "name": "Entrusts"
+  "$schema": "https://raw.githubusercontent.com/lippkg/lip/main/schemas/tooth.v2.schema.json",
+  "format_version": 2,
+  "tooth": "github.com/lgc-LLDev/Entrusts",
+  "version": "0.3.0",
+  "info": {
+    "name": "Entrusts",
+    "description": "A player entrustment plugin",
+    "author": "student_2333",
+    "tags": ["plugin", "lse", "quickjs"]
   },
-  "placement": [
-    {
-      "source": "dist/*",
-      "destination": "plugins/nodejs/entrusts/*"
-    }
-  ],
-  "possession": ["plugins/Entrusts/"],
-  "tool": {},
-  "tooth": "github.com/lgc-LLSEDev/Entrusts",
-  "version": "0.2.1"
+  "files": {
+    "place": [
+      {
+        "src": "Entrusts.js",
+        "dest": "plugins/Entrusts/Entrusts.js"
+      },
+      {
+        "src": "manifest.json",
+        "dest": "plugins/Entrusts/manifest.json"
+      }
+    ]
+  }
 }

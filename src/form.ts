@@ -1,4 +1,10 @@
-import { CustomFormEx, SimpleFormEx, sendModalFormAsync } from 'form-api-ex';
+import {
+  CustomFormEx,
+  FormClose,
+  SimpleFormEx,
+  sendModalFormAsync,
+} from 'form-api-ex';
+
 import { Entrust, ItemConfig, config, entrusts, writeEntrusts } from './config';
 import { countContainerItem, formatDate, removeContainerItem } from './util';
 
@@ -160,7 +166,7 @@ export async function entrustDetail(
   form.buttons.push(['§3返回列表', async () => false]);
 
   const res = await form.sendAsync(player);
-  if (!res) return false;
+  if (res === FormClose) return false;
 
   const ret = await res[1](player, mission);
   return ret;
@@ -169,7 +175,7 @@ export async function entrustDetail(
 export async function selectItem(
   player: Player,
   items: ItemConfig[]
-): Promise<ItemConfig | null> {
+): Promise<ItemConfig | FormClose> {
   const form = new SimpleFormEx(items);
   form.title = '选择物品';
   form.canJumpPage = true;
@@ -177,7 +183,6 @@ export async function selectItem(
   form.hasSearchButton = true;
   form.formatter = itemFormatter;
   form.searcher = itemSearcher;
-
   return form.sendAsync(player);
 }
 
@@ -211,7 +216,7 @@ export async function uploadEntrust(
     );
 
     const res = await form.sendAsync(player);
-    if (res) {
+    if (res !== FormClose) {
       const name = res.name.trim();
 
       if (!name) {
@@ -267,7 +272,7 @@ export async function uploadEntrust(
       });
 
     const res = await form.sendAsync(player);
-    if (res) {
+    if (res !== FormClose) {
       const { requireAmount, submitAmount } = res;
       const requireNum = Number(requireAmount);
       const submitNum = Number(submitAmount);
@@ -333,7 +338,7 @@ export async function uploadEntrust(
     form.formatter = ([v]) => [v];
 
     const res = await form.sendAsync(player);
-    if (!res) return false;
+    if (res === FormClose) return false;
 
     const val = await res[1]();
     if (val === false) return false;
@@ -404,7 +409,7 @@ export async function entrustList(
   form.searcher = entrustSearcher;
 
   const res = await form.sendAsync(player);
-  if (!res) return false;
+  if (res === FormClose) return false;
 
   const ret = await entrustDetail(player, res);
   if (!ret) return entrustList(player, items);
@@ -433,7 +438,7 @@ export async function entrustMenu(
   form.formatter = ([v]) => [v];
 
   const res = await form.sendAsync(player);
-  if (!res) return false;
+  if (res === FormClose) return false;
 
   const ret = await res[1](player, items);
   if (!ret) return entrustMenu(player, items);

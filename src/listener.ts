@@ -1,6 +1,7 @@
+import { wrapAsyncFunc } from 'form-api-ex';
+
 import { config } from './config';
 import { entrustMenu } from './form';
-import { wrapAsyncFunc } from './util';
 
 mc.listen('onUseItem', (player, item) => {
   const openItems: [string, string[]][] = [
