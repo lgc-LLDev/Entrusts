@@ -12,15 +12,15 @@
   "license": "Apache-2.0",
   "dependencies": {
     "form-api-ex": "workspace:^",
-    "schemastery": "^3.7.2"
+    "schemastery": "^3.14.3"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-json": "^5.0.1",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^9.0.2",
     "@types/text-encoding": "^0.0.39",
     "rimraf": "^5.0.5",
-    "rollup": "^3.4.0"
+    "rollup": "^4.12.0"
   }
 }
