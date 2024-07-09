@@ -73,8 +73,8 @@ lip i entrusts
       "name": "绿宝石",
 
       // 物品显示的图标，可以不填
-      "icon": "textures/items/emerald"
-    }
+      "icon": "textures/items/emerald",
+    },
     // ...
   ],
 
@@ -84,8 +84,8 @@ lip i entrusts
     {
       "type": "minecraft:diamond",
       "icon": "textures/items/diamond",
-      "name": "钻石"
-    }
+      "name": "钻石",
+    },
     // ...
   ],
 
@@ -95,7 +95,7 @@ lip i entrusts
     // 使用木棍打开奖励绿宝石的委托列表
     "minecraft:stick": ["minecraft:emerald"],
     // 同上，使用羽毛打开奖励绿宝石的委托列表
-    "minecraft:feather": ["minecraft:emerald"]
+    "minecraft:feather": ["minecraft:emerald"],
     // ...
   },
 
@@ -107,7 +107,7 @@ lip i entrusts
   "onlyUseOpenItem": false,
 
   // 是否只有 OP 能执行插件指令
-  "cmdOnlyOp": false
+  "cmdOnlyOp": false,
 }
 ```
 
